@@ -1,0 +1,106 @@
+.mainFrame {
+  display: flex;
+}
+
+.mainFrame-filters {
+  padding-top: 30px;
+  flex-shrink: 0;
+  width: 250px;
+  /* text-align: left; */
+}
+
+.filters-tilte {
+  /* text-align: left; */
+  margin: 10px 8px;
+  font-size: 17px;
+}
+
+.filters-content {
+  padding: 8px;
+}
+
+.filters {
+  height: 28px;
+  line-height: 28px;
+  font-size: 15px;
+  margin: 0 0 10px;
+  padding: 0 0px;
+  border-radius: 20px;
+  background-color: #fdfdfd;
+  position: relative;
+}
+
+.mainFrame-products {
+
+  display: flex;
+  flex-direction: column;
+}
+
+.products-title {
+  margin: 10px 8px;
+  font-size: 17px;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.product {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  /* background-color: #fff;
+    width: calc(33% - 20px); */
+  /* padding: 10px; */
+}
+
+.corazon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  text-align: center;
+  line-height: 40px;
+  width: 40px;
+  height: 40px;
+  border-radius: 100px;
+  background-color: rgba(0, 0, 0, 0.2);
+  color: rgba(220, 220, 220, 0.4);
+
+
+}
+
+corazon:hover {
+  color: rgba(255, 0, 0, 1);
+}
+
+
+/* .sidebar {
+  display: block;
+  width: 20%;
+  font-size: 20px;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}
+.input-field {
+  height: 30px;
+  padding-left: 5px;
+}
+.container {
+  display: block;
+  width: 80%;
+}
+
+.mainframe {
+  display: flex;
+}
+
+.filter-section {
+  padding: 40px 20px 20px 50px;
+}
+
+.product-card-wrapper {
+  min-height: calc(100vh - 170px);
+  padding: 20px;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+} */
