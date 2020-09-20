@@ -53,7 +53,7 @@ function App(props) {
             component={Products}
             value={user}
             setProducts={handlefilterList}
-            list={list}
+            // list={list}
           />
           <Route
             path="/signin"

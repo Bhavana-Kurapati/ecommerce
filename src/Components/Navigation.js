@@ -12,6 +12,7 @@ import {
   Button,
   FormControl,
 } from "react-bootstrap";
+import data from "./data.js";
 
 function Navigation(props) {
   const dataList = [...new Set(data.map((data) => data.title))];

@@ -1,20 +1,21 @@
-import React, { Component } from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import FilterBar from "./FilterBar";
-import {
-  Card,
-  CardDeck,
-  CardImg,
-  CardColumns,
-  Container,
-  Row,
-  Col,
-  CardGroup,
-  Dropdown,
-} from "react-bootstrap";
+import { Card, CardImg, Row, Col, CardGroup } from "react-bootstrap";
 import "./image.css";
+import data from "./data.js";
+import { connect } from "react-redux";
+import "./Product.css";
+import "./FilterBar.css";
 
 function Products(props) {
+  useEffect(() => {
+    const action = {
+      type: "FETCH_PRODUCTS",
+      payload: data,
+    };
+    props.dispatch(action);
+  });
   function handleFilter(filteredPriceData, checkedBrands, checkedCategory) {
     let filteredData = [];
 
@@ -38,9 +39,7 @@ function Products(props) {
 
     props.setProducts(filteredData);
   }
-
-  console.log(props.list);
-
+  console.log("products", props.products);
   return (
     <div className="mainFrame">
       <FilterBar handleFilter={handleFilter} />
@@ -48,7 +47,7 @@ function Products(props) {
         <h3 class="products-title">Products</h3>
         <CardGroup className="container">
           <Row>
-            {props.list.map((data) => {
+            {props.products.map((data) => {
               return (
                 <Col md={4} sm={6} xs={12}>
                   <Card className="product">
@@ -102,4 +101,16 @@ function Products(props) {
   );
 }
 
-export default Products;
+const mapStateToProps = (state) => {
+  return {
+    products: state.products,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    dispatch,
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Products);

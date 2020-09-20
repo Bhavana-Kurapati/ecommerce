@@ -1,4 +1,7 @@
-export default function Reducer(state = {}, action) {
+const intialState = {
+  products: [],
+};
+export default function Reducer(state = intialState, action) {
   switch (action.type) {
     case "LOGIN":
       return {
@@ -9,6 +12,11 @@ export default function Reducer(state = {}, action) {
       return {
         ...state,
         user: null,
+      };
+    case "FETCH_PRODUCTS":
+      return {
+        ...state,
+        products: action.payload,
       };
     default:
       return state;
