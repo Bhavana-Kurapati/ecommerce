@@ -19,13 +19,3 @@ const ProtectedRoute = ({ component: Component, value, ...rest }) => {
 };
 
 export default ProtectedRoute;
-
-// function Test({ name: Name, ...rest }) {
-//     console.log(obj)
-// }
-
-// Test({
-//     name: "SOAL",
-//     location: "Hyd",
-//     program: "tep"
-// })

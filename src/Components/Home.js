@@ -1,9 +1,8 @@
 import React from "react";
-//import { Carousel } from "react-bootstrap";
 import Carousel from "react-bootstrap/Carousel";
 import Footer from "./Footer";
 import pen from "./image.css";
-import { connect } from "react-redux";
+
 function Home(props) {
   return (
     <div>
@@ -13,7 +12,6 @@ function Home(props) {
           <img
             style={{ height: "500px" }}
             className="d-block w-100"
-            ///src={pen}
             src="https://miro.medium.com/max/3600/1*HSisLuifMO6KbLfPOKtLow.jpeg"
             alt="First slide"
           />
@@ -56,13 +54,4 @@ function Home(props) {
   );
 }
 
-// const mapStateToProps = (state) => {
-//   console.log(state);
-//   return {
-//     user: state.user,
-//   };
-// };
-//export default connect(mapStateToProps)(Home);
 export default Home;
-
-//src="holder.js/800x400?text=Second slide&bg=282c34"

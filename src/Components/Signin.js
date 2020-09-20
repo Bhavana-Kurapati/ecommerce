@@ -23,10 +23,6 @@ function Signin(props) {
   }
   function handleChange(event) {
     const { name, value } = event.target;
-
-    // setLogin({
-    //   [event.target.name]: event.target.value,
-    // });
     setLogin((prevValue) => {
       if (name === "username") {
         return {
@@ -41,18 +37,11 @@ function Signin(props) {
       }
     });
   }
-
-  // if (props.user) {
-  //   return <Redirect to="/" />;
-  // }
   return (
     <div className="signin-container">
       <div>Please Signin</div>
-      {/* <input onChange={props.onChange} name="username" />
-      <input onChange={props.onChange} name="password" type="password" /> */}
       <input onChange={handleChange} name="username" />
       <input onChange={handleChange} name="password" type="password" />
-      {/* <button onClick={props.onClick}>signin</button> */}
       <button onClick={handleClick}>signin</button>
     </div>
   );

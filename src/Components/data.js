@@ -23,12 +23,6 @@ export default [
     category: "china",
     rating: 0,
     review: [],
-    // review: [
-    //   {
-    //     name: "",
-    //     content: "",
-    //   },
-    // ],
     numOfReviews: 0,
     image:
       "https://cms.cloudinary.vpsvc.com//image/fetch/q_auto:eco,w_auto,f_auto,dpr_auto/https://s3-eu-west-1.amazonaws.com/sitecore-media-bucket/prod%2Fen%2F%7B3D1BD3F1-6E86-40F6-9377-23044E5B9A42%7D",
@@ -43,12 +37,6 @@ export default [
     category: "USA",
     rating: 0,
     review: [],
-    // review: [
-    //   {
-    //     name: "",
-    //     content: "",
-    //   },
-    // ],
     numOfReviews: 0,
     image:
       "https://cms.cloudinary.vpsvc.com//image/fetch/q_auto:eco,w_auto,f_auto,dpr_auto/https://s3-eu-west-1.amazonaws.com/sitecore-media-bucket/prod%2Fen%2F%7B3D1BD3F1-6E86-40F6-9377-23044E5B9A42%7D",
@@ -63,12 +51,6 @@ export default [
     category: "korea",
     rating: 0,
     review: [],
-    // review: [
-    //   {
-    //     name: "",
-    //     content: "",
-    //   },
-    // ],
     numOfReviews: 0,
     image:
       "https://cms.cloudinary.vpsvc.com//image/fetch/q_auto:eco,w_auto,f_auto,dpr_auto/https://s3-eu-west-1.amazonaws.com/sitecore-media-bucket/prod%2Fen%2F%7B3D1BD3F1-6E86-40F6-9377-23044E5B9A42%7D",
@@ -83,12 +65,6 @@ export default [
     category: "USA",
     rating: 0,
     review: [],
-    // review: [
-    //   {
-    //     name: "",
-    //     content: "",
-    //   },
-    // ],
     numOfReviews: 0,
     image:
       "https://cms.cloudinary.vpsvc.com//image/fetch/q_auto:eco,w_auto,f_auto,dpr_auto/https://s3-eu-west-1.amazonaws.com/sitecore-media-bucket/prod%2Fen%2F%7B3D1BD3F1-6E86-40F6-9377-23044E5B9A42%7D",
@@ -103,12 +79,6 @@ export default [
     category: "USA",
     rating: 0,
     review: [],
-    // review: [
-    //   {
-    //     name: "",
-    //     content: "",
-    //   },
-    // ],
     numOfReviews: 0,
     image:
       "https://cms.cloudinary.vpsvc.com//image/fetch/q_auto:eco,w_auto,f_auto,dpr_auto/https://s3-eu-west-1.amazonaws.com/sitecore-media-bucket/prod%2Fen%2F%7B3D1BD3F1-6E86-40F6-9377-23044E5B9A42%7D",
@@ -123,12 +93,6 @@ export default [
     category: "china",
     rating: 0,
     review: [],
-    // review: [
-    //   {
-    //     name: "",
-    //     content: "",
-    //   },
-    // ],
     numOfReviews: 0,
     image:
       "https://cms.cloudinary.vpsvc.com//image/fetch/q_auto:eco,w_auto,f_auto,dpr_auto/https://s3-eu-west-1.amazonaws.com/sitecore-media-bucket/prod%2Fen%2F%7B3D1BD3F1-6E86-40F6-9377-23044E5B9A42%7D",
@@ -143,12 +107,6 @@ export default [
     category: "USA",
     rating: 0,
     review: [],
-    // review: [
-    //   {
-    //     name: "",
-    //     content: "",
-    //   },
-    // ],
     numOfReviews: 0,
     image:
       "https://cms.cloudinary.vpsvc.com//image/fetch/q_auto:eco,w_auto,f_auto,dpr_auto/https://s3-eu-west-1.amazonaws.com/sitecore-media-bucket/prod%2Fen%2F%7B3D1BD3F1-6E86-40F6-9377-23044E5B9A42%7D",
@@ -163,12 +121,6 @@ export default [
     category: "korea",
     rating: 0,
     review: [],
-    // review: [
-    //   {
-    //     name: "",
-    //     content: "",
-    //   },
-    // ],
     numOfReviews: 0,
     image:
       "https://cms.cloudinary.vpsvc.com//image/fetch/q_auto:eco,w_auto,f_auto,dpr_auto/https://s3-eu-west-1.amazonaws.com/sitecore-media-bucket/prod%2Fen%2F%7B3D1BD3F1-6E86-40F6-9377-23044E5B9A42%7D",
