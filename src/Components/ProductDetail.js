@@ -13,18 +13,21 @@ import {
   Button,
   FormControl,
 } from "react-bootstrap";
+import { connect } from "react-redux";
 
 function ProductDetail(props) {
-  console.log(props.match.params.id);
   const product = data.find((y) => y.id === props.match.params.id);
   const [rating, setRating] = useState(0);
   const [reviews, setReviews] = useState([]);
-  // product.review = reviews;
   function handleClick() {
-    //const amount = amount + product.price;
     const quantity = document.getElementById("quantity").value;
     product.quantity = quantity;
-    props.handleClickCart(product);
+    const action = {
+      type: "ADD_CART",
+      payload: product,
+    };
+    // console.log(action);
+    props.dispatch(action);
   }
   function onStarClick(nextValue, prevValue, name) {
     setRating(nextValue);
@@ -38,9 +41,6 @@ function ProductDetail(props) {
     product.review = [...product.review, review];
     ++product.numOfReviews;
   }
-  ///console.log(product.review);
-  // var e = document.getElementById("quantity").value;
-  //console.log(e);
 
   return (
     <div>
@@ -150,233 +150,15 @@ function ProductDetail(props) {
             </button>
           </Col>
         </Row>
-        {/* <div className="classic-tabs border rounded px-4 pt-1">
-          <ul
-            className="nav tabs-primary nav-justified"
-            id="advancedTab"
-            role="tablist"
-          >
-            <li className="nav-item">
-              <NavItem>
-                <a
-                  className="active show"
-                  id="description-tab"
-                  data-toggle="tab"
-                  href="#description"
-                  role="tab"
-                  aria-controls="description"
-                  aria-selected="true"
-                >
-                  <Nav.Link>Description</Nav.Link>
-                </a>
-              </NavItem>
-            </li>
-            <li className="nav-item">
-              <NavItem>
-                <a
-                  id="info-tab"
-                  data-toggle="tab"
-                  // href="#info"
-                  role="tab"
-                  aria-controls="info"
-                  aria-selected="false"
-                >
-                  <Nav.Link>
-                    <Link to={"/productDetail/" + product.id + "/#info"}>
-                      Information
-                    </Link>
-                  </Nav.Link>
-                </a>
-              </NavItem>
-            </li>
-            <li className="nav-item">
-              <a
-                className="nav-link"
-                id="reviews-tab"
-                data-toggle="tab"
-                href="#reviews"
-                role="tab"
-                aria-controls="reviews"
-                aria-selected="false"
-              >
-                Reviews({product.numOfReviews})
-              </a>
-            </li>
-          </ul>
-          <div class="tab-content" id="advancedTabContent">
-            <div
-              class="tab-pane fade show active"
-              id="description"
-              role="tabpanel"
-              aria-labelledby="description-tab"
-            >
-              <h5>Product Description</h5>
-              <p class="small text-muted text-uppercase mb-2">mobiles</p>
-              <div className="rating">
-                <RatingComponent
-                  name="ratel"
-                  starCount={5}
-                  value={product.rating}
-                  onStarClick={onStarClick}
-                />
-              </div>
-              <h6>${product.price}</h6>
-              <p class="pt-1">{product.description}</p>
-            </div>
-            <div
-              class="tab-pane fade"
-              id="info"
-              role="tabpanel"
-              aria-labelledby="info-tab"
-            >
-              <h5>Additional Information</h5>
-              <table class="table table-striped table-bordered mt-3">
-                <thead>
-                  <tr>
-                    <th scope="row" class="w-150 dark-grey-text h6">
-                      Weight
-                    </th>
-                    <td>
-                      <em>0.3 kg</em>
-                    </td>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row" class="w-150 dark-grey-text h6">
-                      Dimensions
-                    </th>
-                    <td>
-                      <em>50 × 60 cm</em>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div
-              class="tab-pane fade"
-              id="reviews"
-              role="tabpanel"
-              aria-labelledby="reviews-tab"
-            >
-              <h5>
-                <span>1</span> review for <span>{product.title}</span>
-              </h5>
-              <div class="media mt-3 mb-4">
-                <img
-                  class="d-flex mr-3 z-depth-1"
-                  src="https://mdbootstrap.com/img/Photos/Others/placeholder1.jpg"
-                  width="62"
-                  alt="Generic placeholder image"
-                />
-                <div class="media-body">
-                  <div class="d-sm-flex justify-content-between">
-                    <p class="mt-1 mb-2">
-                      <strong>Marthasteward </strong>
-                      <span>– </span>
-                      <span>January 28, 2020</span>
-                    </p>
-                  </div>
-                  <p class="mb-0">Nice one, love it!</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div> */}
       </section>
     </div>
   );
 }
-export default ProductDetail;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    dispatch,
+  };
+};
 
-{
-  /* <Row>
-<Col md={6} mb={4} mb-md={0}>
-  <div id="mdb-lightbox-ui"></div>
-  <div class="mdb-lightbox"></div>
-  <div className="details">
-    <div className="details-image">
-      <img src={product.image} />
-    </div>
-    <div className="details-info">
-      <ul>
-        <li>
-          <h3>{product.title}</h3>
-        </li>
-        <li>
-          <div>Price: ${product.price}</div>
-        </li>
-        <li>
-          <div>
-            <b>Description:</b> {product.description}
-          </div>
-        </li>
-        <li>
-          Quantity:
-          <select id="quantity">
-            <option value={1}>1</option>
-            <option value={2}>2</option>
-            <option value={3}>3</option>
-            <option value={4}>4</option>
-          </select>
-        </li>
-
-        <li>
-          <div>
-            <p>Rating: {product.rating}</p>
-            <RatingComponent
-              name="ratel"
-              starCount={5}
-              value={product.rating}
-              onStarClick={onStarClick}
-            />
-          </div>
-          <a href="#reviews">{product.numOfReviews} reviews</a>
-        </li>
-        <li>
-          <button onClick={handleClick}>Add to cart</button>
-        </li>
-      </ul>
-      <br />
-      <br />
-      <br />
-      <br />
-      <h2 id="reviews">Reviews</h2>
-      <Reviews addReview={addReview} />
-      {product.review.map((review, index) => {
-        return (
-          <div className="review">
-            <h1>
-              {index + 1}.{product.review[index].name}
-            </h1>
-            <p>{product.review[index].content}</p>
-          </div>
-        );
-      })}
-    </div>
-  </div>
-</Col>
-</Row>
-</section>
-</div>
-); */
-}
-{
-  /* <br />
-<br />
-<br />
-<br />
-<h2 id="reviews">Reviews</h2>
-<Reviews addReview={addReview} />
-{product.review.map((review, index) => {
-  return (
-    <div className="review">
-      <h1>
-        {index + 1}.{product.review[index].name}
-      </h1>
-      <p>{product.review[index].content}</p>
-    </div>
-  );
-})}
-</div> */
-}
+export default connect(null, mapDispatchToProps)(ProductDetail);
+//export default ProductDetail;

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import FilterBar from "./FilterBar";
 import { Card, CardImg, Row, Col, CardGroup } from "react-bootstrap";
@@ -9,45 +9,29 @@ import "./Product.css";
 import "./FilterBar.css";
 
 function Products(props) {
+  const { products, filteredList } = props;
+
+  console.log("Pro", products);
+  let [list, setList] = useState(filteredList);
+
+  useEffect(() => setList(filteredList), [filteredList]);
   useEffect(() => {
     const action = {
       type: "FETCH_PRODUCTS",
       payload: data,
     };
     props.dispatch(action);
-  });
-  function handleFilter(filteredPriceData, checkedBrands, checkedCategory) {
-    let filteredData = [];
+  }, [products]);
+  console.log("list::::", list);
 
-    if (checkedBrands.length === 0 && checkedCategory.length === 0) {
-      filteredData = filteredPriceData;
-    } else if (checkedBrands.length > 0 && checkedCategory.length === 0) {
-      filteredData = filteredPriceData.filter((data) =>
-        checkedBrands.includes(data.brand)
-      );
-    } else if (checkedBrands.length === 0 && checkedCategory.length > 0) {
-      filteredData = filteredPriceData.filter((data) =>
-        checkedCategory.includes(data.category)
-      );
-    } else if (checkedBrands.length > 0 && checkedCategory.length > 0) {
-      filteredData = filteredPriceData.filter(
-        (data) =>
-          checkedBrands.includes(data.brand) &&
-          checkedCategory.includes(data.category)
-      );
-    }
-
-    props.setProducts(filteredData);
-  }
-  console.log("products", props.products);
   return (
     <div className="mainFrame">
-      <FilterBar handleFilter={handleFilter} />
+      <FilterBar />
       <div className="mainFrame-products">
         <h3 class="products-title">Products</h3>
         <CardGroup className="container">
           <Row>
-            {props.products.map((data) => {
+            {list.map((data) => {
               return (
                 <Col md={4} sm={6} xs={12}>
                   <Card className="product">
@@ -104,6 +88,7 @@ function Products(props) {
 const mapStateToProps = (state) => {
   return {
     products: state.products,
+    filteredList: state.filteredList,
   };
 };
 

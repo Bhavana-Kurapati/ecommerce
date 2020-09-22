@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import "./styles.css";
@@ -15,33 +15,23 @@ import data from "./Components/data.js";
 import { connect } from "react-redux";
 
 function App(props) {
-  const { user } = props;
-  let [count, setCount] = useState(0);
-  let [product, setProduct] = useState([]);
-  let [amount, setAmount] = useState(0);
-  function handleClickCarts(prodduct) {
-    console.log("Hi.. I am clicked");
-    const n = count + parseInt(prodduct.quantity);
-    const amt = amount + prodduct.price;
-    setAmount(amt);
-    setCount(n);
-    setProduct((prevValue) => {
-      return [...prevValue, prodduct];
-    });
-  }
-  let [list, setList] = useState(data);
-  function handlefilterList(list) {
-    console.log("searchList:", list);
-    setList(list);
-  }
-
+  const { user, count, amount, product_cart, filteredList, products } = props;
+  // let [list, setList] = useState(products);
+  //console.log(list);
+  // function handlefilterList() {
+  //   //console.log("searchList:", list);
+  //   setList(list);
+  // }
+  //useEffect(() => setList(filteredList));
+  //console.log("nvd", filteredList);
+  let list = { products };
   return (
     <div className="App">
       <BrowserRouter>
         <Navigation
           value={user}
           count={count}
-          searchesList={handlefilterList}
+          // searchesList={handlefilterList}
         />
         <Switch>
           <Route exact path="/">
@@ -52,8 +42,8 @@ function App(props) {
             path="/products"
             component={Products}
             value={user}
-            setProducts={handlefilterList}
-            // list={list}
+            //setProducts={filteredList}
+            //list={filteredList}
           />
           <Route
             path="/signin"
@@ -73,15 +63,13 @@ function App(props) {
                 {...props}
                 numOfItems={count}
                 amount={amount}
-                products={product}
+                products={product_cart}
               />
             )}
           />
           <Route
             path="/productDetail/:id"
-            render={(props) => (
-              <ProductDetail {...props} handleClickCart={handleClickCarts} />
-            )}
+            render={(props) => <ProductDetail {...props} />}
           />
           <Route component={Default} />
         </Switch>
@@ -90,8 +78,35 @@ function App(props) {
   );
 }
 const mapStateToProps = (state) => {
+  //console.log("state:", state.products);
+  console.log("list", state.filteredList);
   return {
+    products: state.products,
     user: state.user,
+    count: state.count,
+    amount: state.amount,
+    product_cart: state.product_cart,
+    filteredList: state.filteredList,
   };
 };
-export default connect(mapStateToProps)(App);
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    dispatch,
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(App);
+
+// let [count, setCount] = useState(0);
+// let [product, setProduct] = useState([]);
+// let [amount, setAmount] = useState(0);
+// function handleClickCarts(prodduct) {
+//   console.log("Hi.. I am clicked");
+//   const n = count + parseInt(prodduct.quantity);
+//   const amt = amount + prodduct.price;
+//   setAmount(amt);
+//   setCount(n);
+//   setProduct((prevValue) => {
+//     return [...prevValue, prodduct];
+//   });
+// }

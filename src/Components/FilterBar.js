@@ -1,38 +1,66 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
-import data from "./data.js";
+//import data from "./data.js";
+import { connect } from "react-redux";
+import data from "./data";
 function FilterBar(props) {
+  const { products } = props;
   const [brands, setBrands] = useState(
-    [...new Set(data.map((data) => data.brand))].map((brand) => {
+    [...new Set(products.map((data) => data.brand))].map((brand) => {
       return {
         name: brand,
         isChecked: false,
       };
     })
   );
-  //console.log(brands);
-  //console.log(brands);
+  useEffect(
+    () =>
+      setBrands(
+        [...new Set(products.map((data) => data.brand))].map((brand) => {
+          return {
+            name: brand,
+            isChecked: false,
+          };
+        })
+      ),
+    [products]
+  );
+  console.log("brands", brands);
   const [categories, setCategory] = useState(
-    [...new Set(data.map((data) => data.category))].map((category) => {
+    [...new Set(products.map((data) => data.category))].map((category) => {
       return {
         name: category,
         isChecked: false,
       };
     })
   );
-  const [price, setPrice] = useState(data);
+  useEffect(
+    () =>
+      setCategory(
+        [...new Set(products.map((data) => data.category))].map((category) => {
+          return {
+            name: category,
+            isChecked: false,
+          };
+        })
+      ),
+    [products]
+  );
+  console.log("category", categories);
+  const [price, setPrice] = useState(products);
+  useEffect(() => setPrice(products), [products]);
   const checkedValues = (array) =>
     array.filter((item) => item.isChecked === true);
   const mappingValues = (array) => array.map((item) => item.name);
 
   function handlePriceChange(min, max) {
-    const filteredPriceData = data.filter(
+    const filteredPriceData = products.filter(
       (data) =>
         (min ? data.price > min : true) && (max ? data.price <= max : true)
     );
     setPrice(filteredPriceData);
 
-    props.handleFilter(
+    handleFilter(
       filteredPriceData,
       mappingValues(checkedValues(brands)),
       mappingValues(checkedValues(categories))
@@ -46,7 +74,8 @@ function FilterBar(props) {
       }
     });
     setBrands(brands);
-    props.handleFilter(
+    console.log("checkedBrands", mappingValues(checkedValues(brands)));
+    handleFilter(
       price,
       mappingValues(checkedValues(brands)),
       mappingValues(checkedValues(categories))
@@ -60,12 +89,40 @@ function FilterBar(props) {
       }
     });
     setCategory(categories);
-    props.handleFilter(
+    handleFilter(
       price,
       mappingValues(checkedValues(brands)),
       mappingValues(checkedValues(categories))
     );
   }
+
+  function handleFilter(filteredPriceData, checkedBrands, checkedCategory) {
+    let filteredList = [];
+    if (checkedBrands.length === 0 && checkedCategory.length === 0) {
+      filteredList = filteredPriceData;
+    } else if (checkedBrands.length > 0 && checkedCategory.length === 0) {
+      filteredList = filteredPriceData.filter((data) =>
+        checkedBrands.includes(data.brand)
+      );
+    } else if (checkedBrands.length === 0 && checkedCategory.length > 0) {
+      filteredList = filteredPriceData.filter((data) =>
+        checkedCategory.includes(data.category)
+      );
+    } else if (checkedBrands.length > 0 && checkedCategory.length > 0) {
+      filteredList = filteredPriceData.filter(
+        (data) =>
+          checkedBrands.includes(data.brand) &&
+          checkedCategory.includes(data.category)
+      );
+    }
+    const action = {
+      type: "FILTERED_LIST",
+      payload: filteredList,
+    };
+    console.log("filteredList", filteredList);
+    props.dispatch(action);
+  }
+
   return (
     <div className="mainFrame-filters">
       <h5 className="filters-title mb-4">Filters</h5>
@@ -157,23 +214,6 @@ function FilterBar(props) {
               />
               <label for="new">100 and above dollars</label>
             </div>
-            {/* <form>
-            <div>
-              <div>
-                <div>
-                  <input type="text" id="from" />
-                  <label for="from">$ Min</label>
-                </div>
-              </div>
-              <p>-</p>
-              <div>
-                <div>
-                  <input type="text" id="to" />
-                  <label for="to">$ Max</label>
-                </div>
-              </div>
-            </div>
-          </form> */}
           </section>
         </div>
         <div>
@@ -196,23 +236,6 @@ function FilterBar(props) {
                 );
               })}
             </div>
-            {/* <div>
-            <input type="checkbox" id="new" />
-            <label for="new">32</label>
-          </div>
-          <div>
-            <input type="checkbox" id="new" />
-            <label for="new">34</label>
-          </div>
-          <div>
-            <input type="checkbox" id="new" />
-            <label for="new">36</label>
-          </div>
-          <div>
-            <input type="checkbox" id="new" />
-            <label for="new">38</label>
-          </div>
-          <a>More</a> */}
           </section>
         </div>
         <div>
@@ -224,4 +247,16 @@ function FilterBar(props) {
     </div>
   );
 }
-export default FilterBar;
+const mapStateToProps = (state) => {
+  return {
+    products: state.products,
+  };
+};
+const mapDispatchToProps = (dispatch) => {
+  return {
+    dispatch,
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(FilterBar);
+//export default FilterBar;
