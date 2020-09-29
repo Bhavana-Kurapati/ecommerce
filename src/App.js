@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import "./styles.css";
+import SellProducts from "./Components/SellProducts";
 import Home from "./Components/Home";
 import Products from "./Components/Products";
 import Signin from "./Components/Signin";
@@ -45,6 +46,14 @@ function App(props) {
             //setProducts={filteredList}
             //list={filteredList}
           />
+          <ProtectedRoute
+            exact
+            path="/sellproducts"
+            component={SellProducts}
+            value={user}
+            //setProducts={filteredList}
+            //list={filteredList}
+          />
           <Route
             path="/signin"
             render={(props) => {
@@ -78,7 +87,7 @@ function App(props) {
   );
 }
 const mapStateToProps = (state) => {
-  //console.log("state:", state.products);
+  console.log("state:", state.products);
   console.log("list", state.filteredList);
   return {
     products: state.products,

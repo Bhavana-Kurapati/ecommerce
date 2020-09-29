@@ -64,6 +64,9 @@ function Navigation(props) {
             <Nav.Link>
               <Link to="/products">Products</Link>
             </Nav.Link>
+            <Nav.Link>
+              <Link to="/sellproducts">Sell Products</Link>
+            </Nav.Link>
           </Nav>
           <Nav className="ml-auto">
             <Form inline>

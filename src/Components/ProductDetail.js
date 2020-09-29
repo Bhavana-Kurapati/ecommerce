@@ -148,8 +148,23 @@ function ProductDetail(props) {
             >
               <i class="fas fa-shopping-cart pr-2"></i>Add to cart
             </button>
+            <hr />
           </Col>
         </Row>
+        <div>
+          <h2 id="reviews">Reviews</h2>
+          <Reviews addReview={addReview} />
+          {product.review.map((review, index) => {
+            return (
+              <div className="review">
+                <h1>
+                  {index + 1}.{product.review[index].name}
+                </h1>
+                <p>{product.review[index].content}</p>
+              </div>
+            );
+          })}
+        </div>
       </section>
     </div>
   );

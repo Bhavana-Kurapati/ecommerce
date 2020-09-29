@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { useState } from "react";
 //import data from "./data.js";
 import { connect } from "react-redux";
@@ -13,16 +13,23 @@ function FilterBar(props) {
       };
     })
   );
+  const prevValues = useRef({ products });
+  // console.log(brands[1]);
   useEffect(
-    () =>
-      setBrands(
-        [...new Set(products.map((data) => data.brand))].map((brand) => {
-          return {
-            name: brand,
-            isChecked: false,
-          };
-        })
-      ),
+    () => {
+      if (!prevValues.current.products) {
+        setBrands(
+          [...new Set(products.map((data) => data.brand))].map((brand) => {
+            console.log("brand", brand);
+            return {
+              name: brand,
+              isChecked: false,
+            };
+          })
+        );
+      }
+    },
+    //setBrands(brands),
     [products]
   );
   console.log("brands", brands);
@@ -67,7 +74,7 @@ function FilterBar(props) {
     );
   }
   function handleChangeBrand(event) {
-    // console.log(event.target);
+    //console.log(event.target);
     brands.forEach((brand) => {
       if (brand.name === event.target.value) {
         brand.isChecked = event.target.checked;
@@ -82,13 +89,14 @@ function FilterBar(props) {
     );
   }
   function handleChangeCategory(event) {
-    // console.log(event.target);
+    console.log(event.target.value);
     categories.forEach((categories) => {
-      if (categories.category === event.target.value) {
+      if (categories.name === event.target.value) {
         categories.isChecked = event.target.checked;
       }
     });
     setCategory(categories);
+    console.log("checkedCat", mappingValues(checkedValues(categories)));
     handleFilter(
       price,
       mappingValues(checkedValues(brands)),
@@ -249,7 +257,8 @@ function FilterBar(props) {
 }
 const mapStateToProps = (state) => {
   return {
-    products: state.products,
+    products: [...state.products, ...state.addProducts],
+    //products: state.products,
   };
 };
 const mapDispatchToProps = (dispatch) => {

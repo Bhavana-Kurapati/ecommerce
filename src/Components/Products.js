@@ -7,11 +7,13 @@ import data from "./data.js";
 import { connect } from "react-redux";
 import "./Product.css";
 import "./FilterBar.css";
+import { faDraft2digital } from "@fortawesome/free-brands-svg-icons";
 
 function Products(props) {
-  const { products, filteredList } = props;
+  const { products, filteredList, addProducts } = props;
 
   console.log("Pro", products);
+  console.log("filteredList", filteredList);
   let [list, setList] = useState(filteredList);
 
   useEffect(() => setList(filteredList), [filteredList]);
@@ -89,6 +91,7 @@ const mapStateToProps = (state) => {
   return {
     products: state.products,
     filteredList: state.filteredList,
+    addProducts: state.addProducts,
   };
 };
 

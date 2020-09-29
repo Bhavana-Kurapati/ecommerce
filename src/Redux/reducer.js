@@ -3,10 +3,12 @@ const intialState = {
   count: 0,
   amount: 0,
   product_cart: [],
+  addProducts: [],
   filteredList: [],
 };
 
 export default function Reducer(state = intialState, action) {
+  console.log(state.products);
   switch (action.type) {
     case "LOGIN":
       return {
@@ -19,10 +21,17 @@ export default function Reducer(state = intialState, action) {
         user: null,
       };
     case "FETCH_PRODUCTS":
+      console.log("products", state.products);
+      console.log("filteredList", state.filteredList);
       return {
         ...state,
         products: action.payload,
-        filteredList: action.payload,
+        // state.addProducts.length < 1
+        //   ? action.payload
+        //   : [...action.payload, ...state.addProducts],
+        //products: [...action.payload, ...state.addProducts],
+        //filteredList: action.payload,
+        filteredList: [...action.payload, ...state.addProducts],
       };
     case "ADD_CART":
       //console.log;
@@ -36,6 +45,11 @@ export default function Reducer(state = intialState, action) {
       return {
         ...state,
         filteredList: action.payload,
+      };
+    case "ADD_PRODUCTS":
+      return {
+        ...state,
+        addProducts: [...state.addProducts, action.payload],
       };
 
     default:
